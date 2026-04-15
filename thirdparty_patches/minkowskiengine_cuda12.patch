@@ -1,0 +1,85 @@
+diff --git a/setup.py b/setup.py
+index 452ea57..c03045b 100644
+--- a/setup.py
++++ b/setup.py
+@@ -311,7 +311,8 @@ ext_modules = [
+     Extension(
+         name="MinkowskiEngineBackend._C",
+         sources=[*[str(SRC_PATH / src_file) for src_file in SRC_FILES], *BIND_FILES],
+-        extra_compile_args={"cxx": CC_FLAGS, "nvcc": NVCC_FLAGS},
++        define_macros=[('NVTX_DISABLE', None)],
++        extra_compile_args={"cxx": CC_FLAGS + ['-DNVTX_DISABLE'] , "nvcc": NVCC_FLAGS + ['-DNVTX_DISABLE'],},
+         libraries=libraries,
+     ),
+ ]
+diff --git a/src/3rdparty/concurrent_unordered_map.cuh b/src/3rdparty/concurrent_unordered_map.cuh
+index ed8e1b2..b4c0504 100644
+--- a/src/3rdparty/concurrent_unordered_map.cuh
++++ b/src/3rdparty/concurrent_unordered_map.cuh
+@@ -27,6 +27,7 @@
+ 
+ #include <thrust/pair.h>
+ #include <thrust/count.h>
++#include <thrust/execution_policy.h>
+ 
+ #include <functional>
+ #include <memory>
+diff --git a/src/convolution_kernel.cuh b/src/convolution_kernel.cuh
+index aed7227..d24c56c 100644
+--- a/src/convolution_kernel.cuh
++++ b/src/convolution_kernel.cuh
+@@ -32,6 +32,7 @@
+ #include "kernel_map.cuh"
+ #include "math_functions.cuh"
+ #include "types.hpp"
++#include <thrust/execution_policy.h>
+ 
+ namespace minkowski {
+ 
+diff --git a/src/coordinate_map_gpu.cu b/src/coordinate_map_gpu.cu
+index fb7325d..0609b54 100644
+--- a/src/coordinate_map_gpu.cu
++++ b/src/coordinate_map_gpu.cu
+@@ -37,6 +37,9 @@
+ #include <thrust/iterator/transform_iterator.h>
+ #include <thrust/sort.h>
+ 
++#include <thrust/unique.h>
++#include <thrust/remove.h>
++
+ namespace minkowski {
+ 
+ namespace detail {
+diff --git a/src/coordinate_map_gpu.cuh b/src/coordinate_map_gpu.cuh
+index 15228c4..8f12e86 100644
+--- a/src/coordinate_map_gpu.cuh
++++ b/src/coordinate_map_gpu.cuh
+@@ -136,9 +136,11 @@ public:
+       LOG_DEBUG("Reserve map of",
+                 compute_hash_table_size(size, m_hashtable_occupancy),
+                 "for concurrent_unordered_map of size", size);
+-      m_map = map_type::create(
++      auto map_unique = map_type::create(
+           compute_hash_table_size(size, m_hashtable_occupancy),
+           m_unused_element, m_unused_key, m_hasher, m_equal, m_map_allocator);
++      auto map_deleter = map_unique.get_deleter();
++      m_map = std::shared_ptr<map_type>(map_unique.release(), map_deleter);
+       LOG_DEBUG("Done concurrent_unordered_map creation");
+       CUDA_TRY(cudaStreamSynchronize(0));
+       m_capacity = size;
+diff --git a/src/spmm.cu b/src/spmm.cu
+index 8891a56..34a0690 100644
+--- a/src/spmm.cu
++++ b/src/spmm.cu
+@@ -36,6 +36,11 @@
+ #include <torch/extension.h>
+ #include <torch/script.h>
+ 
++
++#include <thrust/execution_policy.h>
++#include <thrust/reduce.h>
++#include <thrust/sort.h>
++
+ namespace minkowski {
+ 
+ #define BLOCK_SIZE 128

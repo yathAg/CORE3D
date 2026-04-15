@@ -1,0 +1,9 @@
+numpy
+scipy
+plyfile
+tqdm
+h5py
+# torch, torch-scatter, torch-geometric: install manually (CUDA-version dependent)
+# torchsparse, FRNN, MinkowskiEngine: build from source (see docs/INSTALL.md)
+# spconv-cu126: pip install separately
+# mmengine, mmcv, mmdet, mmdet3d: see docs/INSTALL.md Step 4

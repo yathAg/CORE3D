@@ -1,0 +1,200 @@
+wall
+ceiling
+floor
+shower wall
+bathroom wall
+tiled wall
+object
+box
+chair
+ceiling lamp
+book
+socket
+table
+window
+door
+bottle
+light switch
+pipe
+cabinet
+monitor
+shelf
+paper
+heater
+office chair
+pillow
+doorframe
+window frame
+shoes
+trash can
+picture
+cup
+plant
+keyboard
+bag
+windowsill
+clothes
+curtain
+mouse
+jacket
+door frame
+towel
+smoke detector
+objects
+kitchen cabinet
+power sockets
+backpack
+plant pot
+blanket
+whiteboard
+blinds
+poster
+sink
+computer tower
+electrical duct
+decoration
+bed
+cable raceway
+structure
+wall lamp
+laptop
+storage cabinet
+power strip
+suitcase
+bookshelf
+telephone
+jar
+cloth
+sofa
+basket
+wardrobe
+speaker
+crate
+toilet paper
+stool
+cable duct
+faucet
+table lamp
+switch
+bowl
+kitchen counter
+cable
+extension cord
+slippers
+bucket
+electrical control panel
+binder
+light switches
+power outlet
+painting
+mattress
+rug
+plate
+toilet
+notebook
+microwave
+shelf rail
+board
+tv
+whiteboard eraser
+refrigerator
+coax outlet
+file folder
+router
+cushion
+cutting board
+bedside table
+lamp
+phone charger
+kettle
+paper bag
+paper towel
+carpet
+headphones
+soap dispenser
+machine
+pot
+vase
+trolley
+tap
+umbrella
+tray
+curtain rod
+kitchen towel
+sponge
+oven
+mirror
+container
+folder
+pedestal fan
+lab equipment
+spray bottle
+storage rack
+tube
+curtain rail
+paper towel dispenser
+laundry basket
+luggage
+pillar
+bottle crate
+counter
+intercom
+standing lamp
+photograph
+toilet brush
+exhaust fan
+heat pipe
+note
+printer
+electric kettle
+vent
+floor lamp
+coffee maker
+opaque window panel
+coat
+file binder
+frying pan
+shirt
+pc
+light
+mop
+roller blinds
+air vent
+ceiling panel
+tissue box
+desk lamp
+shampoo bottle
+bottles
+clock
+power outlets
+broom
+pen holder
+projector
+stove
+ball
+stove top
+thermos
+whiteboard marker
+yoga mat
+cooking pot
+vacuum cleaner
+fire extinguisher
+plastic bag
+toilet flush button
+magazine
+panel
+toilet paper roll
+valve
+blackboard
+desk divider
+candle
+coffee table
+dumbbell
+laptop charger
+coat hanger
+picture frame
+dustbin
+knife
+pan
+power adapter
+reusable shopping bag

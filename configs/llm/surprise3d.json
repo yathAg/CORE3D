@@ -1,0 +1,79 @@
+{
+  "benchmark": "surprise3d",
+  "data": {
+    "root": "data/surprise-3d",
+    "splits": {
+      "train": "surprise-3d-train.json",
+      "val": "surprise-3d-val.json",
+      "all": [
+        "surprise-3d-train.json",
+        "surprise-3d-val.json"
+      ]
+    },
+    "id_offset": 1
+  },
+  "graph": {
+    "default": "oneformer",
+    "options": {
+      "gt": "results/graphs/scannetpp_gt/scenes",
+      "oneformer": "results/graphs/scannetpp_oneformer/scenes"
+    },
+    "max_objects": 120,
+    "neighbor_cap": 4,
+    "use_edges": true,
+    "use_attributes": true,
+    "use_colors": true,
+    "use_size": true
+  },
+  "model": {
+    "id": "Qwen/Qwen3-4B-Instruct-2507",
+    "dtype": "auto",
+    "quantization": "none",
+    "tensor_parallel_size": 1,
+    "max_model_len": 8192,
+    "gpu_memory_utilization": 0.5,
+    "swap_space_gb": 4,
+    "enable_prefix_caching": true,
+    "trust_remote_code": false,
+    "enforce_eager": false
+  },
+  "generation": {
+    "batch_size": 1,
+    "temperature": 0.1,
+    "top_p": 0.9,
+    "max_tokens": 256,
+    "n": 1
+  },
+  "prompt": {
+    "instruction": "Instruction: Select all object ids from the list that best match the query for the indoor scene. Multiple ids may be correct. Return only JSON with fields prediction (array of ids).",
+    "expects_json": true
+  },
+  "structured_output": {
+    "enabled": true,
+    "allow_rationale": false,
+    "json": {
+      "type": "object",
+      "properties": {
+        "prediction": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      },
+      "required": [
+        "prediction"
+      ],
+      "additionalProperties": false
+    },
+    "disable_additional_properties": true,
+    "disable_fallback": true
+  },
+  "evaluation": {
+    "save_per_query": false,
+    "compute_metrics": true
+  },
+  "output": {
+    "output_path": ""
+  }
+}

@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+
+/data/
+/checkpoints/
+
+logs/
+results/
+ezsp/cache/
+ezsp/output/
+ezsp/runs/
+
+*.egg-info/
+
+.claude/
